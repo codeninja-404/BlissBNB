@@ -2,5 +2,5 @@
 @tailwind components;
 @tailwind utilities;
 .custom-min-height {
-  @apply min-h-[calc(100vh-5rem)];
+  @apply min-h-screen;
 }
