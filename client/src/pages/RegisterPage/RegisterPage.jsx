@@ -10,7 +10,7 @@ const RegisterPage = () => {
   console.log(userInfo);
   const registerUser = (e) => {
     e.preventDefault();
-    axios.get("/test");
+    axios.post("/register", { ...userInfo });
   };
 
   return (

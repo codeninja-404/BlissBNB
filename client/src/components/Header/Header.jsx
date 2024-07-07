@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 const Header = () => {
   return (
     <header className="fixed w-screen bg-gray-700 text-white">
-      <div className="p-4 md:flex justify-between items-center max-w-7xl mx-auto">
+      <div className="p-4 flex justify-between items-center max-w-7xl mx-auto">
         <Link
           to="/"
           className="text-primary flex  items-center font-bold gap-1"
@@ -24,7 +24,7 @@ const Header = () => {
           </svg>
           <span className="tracking-widest pt-1 text-xl">BlissBNB</span>
         </Link>
-        <div className="flex items-center shadow-md shadow-black/50 border border-gray-800 rounded-full px-4 py-2 gap-2">
+        <div className="hidden md:flex items-center shadow-md shadow-black/50 border border-gray-800 rounded-full px-4 py-2 gap-2">
           <div>Anywhere</div>
           <div className="border border-l h-7 border-gray-300"></div>
           <div>Any week</div>

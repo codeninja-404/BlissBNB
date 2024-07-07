@@ -5,6 +5,9 @@ import HomePage from "./pages/HomePage/HomePage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import RootLayout from "./layouts/RootLayout";
+import axios from "axios";
+
+axios.defaults.baseURL = "http://localhost:3000";
 
 const App = () => {
   return (
