@@ -1,6 +1,67 @@
+import { useState } from "react";
+import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const LoginPage = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const userInfo = { email, password };
+  console.log(userInfo);
+  const handleLogin = async (e) => {
+    e.preventDefault();
+
+    try {
+      const res = await axios.post(`/auth/login`, { ...userInfo });
+      console.log(res.data);
+
+      if (res.data.success) {
+        toast(`Login successful`, {
+          icon: "👏",
+          style: {
+            borderRadius: "100px",
+            background: "#4e4e4e",
+            color: "#fff",
+          },
+        });
+      } else {
+        toast(`Login failed: ${res.data.message}`, {
+          icon: "👏",
+          style: {
+            borderRadius: "100px",
+            background: "#4e4e4e",
+            color: "#fff",
+          },
+        });
+      }
+    } catch (error) {
+      console.error("Login error:", error);
+      if (
+        error.response &&
+        error.response.data &&
+        error.response.data.message
+      ) {
+        toast(`${error.response.data.message}`, {
+          icon: "👏",
+          style: {
+            borderRadius: "100px",
+            background: "#4e4e4e",
+            color: "#fff",
+          },
+        });
+      } else {
+        toast(`${error.message}`, {
+          icon: "👏",
+          style: {
+            borderRadius: "100px",
+            background: "#4e4e4e",
+            color: "#fff",
+          },
+        });
+      }
+    }
+  };
+
   return (
     <section className="flex h-[calc(100vh-220px)] flex-col items-center justify-center">
       <a
@@ -25,7 +86,7 @@ const LoginPage = () => {
       </a>
       <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
         <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-          <form className="space-y-4 md:space-y-6" action="#">
+          <form className="space-y-4 md:space-y-6" onSubmit={handleLogin}>
             <div>
               <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                 Your email
@@ -37,6 +98,7 @@ const LoginPage = () => {
                 className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="name@company.com"
                 required=""
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
             <div>
@@ -50,6 +112,7 @@ const LoginPage = () => {
                 placeholder="••••••••"
                 className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 required=""
+                onChange={(e) => setPassword(e.target.value)}
               />
             </div>
 

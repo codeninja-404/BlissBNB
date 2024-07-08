@@ -3,7 +3,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import authRoutes from "./routes/auth.route.js";
-import { errorHandler } from "./middlewares/error.middleware.js";
+import { errorMiddleware } from "./middlewares/error.middleware.js";
 dotenv.config();
 
 const app = express();
@@ -31,7 +31,7 @@ app.get("/api/test", (req, res) => {
 app.use("/api/auth", authRoutes);
 
 // Error handling middleware
-app.use(errorHandler);
+app.use(errorMiddleware);
 
 // Start server
 const PORT = process.env.PORT || 3000;

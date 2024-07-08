@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 const RegisterPage = () => {
   const [name, setName] = useState("");
@@ -14,7 +15,16 @@ const RegisterPage = () => {
       const response = await axios.post("/auth/register", { ...userInfo });
       if (response.data.success) {
         console.log("User registered successfully:", response.data.user);
-        // You can also redirect the user or display a success message here
+        // Show a success toast notification
+        toast.success("User registered successfully", {
+          icon: "👍",
+          style: {
+            borderRadius: "100px",
+            background: "#4e4e4e",
+            color: "#fff",
+          },
+        });
+        // Optionally, you can redirect the user after successful registration
       }
     } catch (error) {
       if (error.response) {
@@ -22,19 +32,44 @@ const RegisterPage = () => {
         console.error("Error response data:", error.response.data);
         console.error("Error response status:", error.response.status);
         console.error("Error response headers:", error.response.headers);
-        // Display an appropriate error message to the user
-        alert(
+        // Display an error toast with the message from the server response
+        toast.error(
           error.response.data.message ||
             "An error occurred during registration.",
+          {
+            icon: "❌",
+            style: {
+              borderRadius: "100px",
+              background: "#4e4e4e",
+              color: "#fff",
+            },
+          },
         );
       } else if (error.request) {
         // The request was made, but no response was received
         console.error("Error request data:", error.request);
-        alert("No response received from the server.");
+        toast.error("No response received from the server.", {
+          icon: "❌",
+          style: {
+            borderRadius: "100px",
+            background: "#4e4e4e",
+            color: "#fff",
+          },
+        });
       } else {
         // Something happened in setting up the request that triggered an error
         console.error("Error message:", error.message);
-        alert("An error occurred while setting up the registration request.");
+        toast.error(
+          "An error occurred while setting up the registration request.",
+          {
+            icon: "❌",
+            style: {
+              borderRadius: "100px",
+              background: "#4e4e4e",
+              color: "#fff",
+            },
+          },
+        );
       }
     }
   };
