@@ -13,13 +13,42 @@ export const registerUser = async (req, res, next) => {
       return next(error);
     }
 
-    const passwordRegex =
-      /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=.*[a-zA-Z]).{8,}$/;
-
-    if (!passwordRegex.test(password)) {
+    if (password.length < 8) {
       const error = errorHandler(
         400,
-        "Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character.",
+        "Password must be at least 8 characters long",
+      );
+      return next(error);
+    }
+
+    if (!/\d/.test(password)) {
+      const error = errorHandler(
+        400,
+        "Password must contain at least one digit (0-9)",
+      );
+      return next(error);
+    }
+
+    if (!/[a-z]/.test(password)) {
+      const error = errorHandler(
+        400,
+        "Password must contain at least one lowercase letter (a-z)",
+      );
+      return next(error);
+    }
+
+    if (!/[A-Z]/.test(password)) {
+      const error = errorHandler(
+        400,
+        "Password must contain at least one uppercase letter (A-Z)",
+      );
+      return next(error);
+    }
+
+    if (!/[@#$%^&+=!]/.test(password)) {
+      const error = errorHandler(
+        400,
+        "Password must contain at least one special character (@#$%^&+=!)",
       );
       return next(error);
     }
