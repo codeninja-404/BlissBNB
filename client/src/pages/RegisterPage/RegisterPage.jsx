@@ -8,9 +8,35 @@ const RegisterPage = () => {
   const [password, setPassword] = useState("");
   const userInfo = { name, email, password };
   console.log(userInfo);
-  const registerUser = (e) => {
+  const registerUser = async (e) => {
     e.preventDefault();
-    axios.post("/register", { ...userInfo });
+    try {
+      const response = await axios.post("/auth/register", { ...userInfo });
+      if (response.data.success) {
+        console.log("User registered successfully:", response.data.user);
+        // You can also redirect the user or display a success message here
+      }
+    } catch (error) {
+      if (error.response) {
+        // The request was made, and the server responded with a status code that falls out of the range of 2xx
+        console.error("Error response data:", error.response.data);
+        console.error("Error response status:", error.response.status);
+        console.error("Error response headers:", error.response.headers);
+        // Display an appropriate error message to the user
+        alert(
+          error.response.data.message ||
+            "An error occurred during registration.",
+        );
+      } else if (error.request) {
+        // The request was made, but no response was received
+        console.error("Error request data:", error.request);
+        alert("No response received from the server.");
+      } else {
+        // Something happened in setting up the request that triggered an error
+        console.error("Error message:", error.message);
+        alert("An error occurred while setting up the registration request.");
+      }
+    }
   };
 
   return (

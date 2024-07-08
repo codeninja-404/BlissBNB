@@ -1,11 +1,14 @@
-const express = require("express");
-const cors = require("cors");
-const dotenv = require("dotenv");
-const mongoose = require("mongoose");
-
+import express from "express";
+import cors from "cors";
+import dotenv from "dotenv";
+import mongoose from "mongoose";
+import authRoutes from "./routes/auth.route.js";
+import { errorHandler } from "./middlewares/error.middleware.js";
 dotenv.config();
+
 const app = express();
 
+// Middleware
 app.use(
   cors({
     credentials: true,
@@ -14,24 +17,24 @@ app.use(
 );
 app.use(express.json());
 
+// Database connection
 mongoose
   .connect(process.env.MONGO_URL)
-  .then(() => {
-    console.log("Db connected");
-  })
-  .catch((err) => {
-    console.log(err);
-  });
-app.get("/test", (req, res) => {
-  res.json("test ok");
+  .then(() => console.log("Database connected"))
+  .catch((err) => console.error("Database connection error:", err));
+
+// Routes
+app.get("/api/test", (req, res) => {
+  res.json("Test OK");
 });
 
-// register user
-app.post("/register", (req, res) => {
-  const { name, email, password } = req.body;
-  res.json("User registered successfully");
-});
+app.use("/api/auth", authRoutes);
 
-app.listen(3000, () => {
-  console.log("Server running on port 3000");
+// Error handling middleware
+app.use(errorHandler);
+
+// Start server
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
