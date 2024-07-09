@@ -1,12 +1,15 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import toast from "react-hot-toast";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import axios from "axios";
+import { UserContext } from "../../Providers/UserContextProvider";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [redirect, setRedirect] = useState(false);
+  const { setUser } = useContext(UserContext);
   const userInfo = { email, password };
   console.log(userInfo);
   const handleLogin = async (e) => {
@@ -25,6 +28,8 @@ const LoginPage = () => {
             color: "#fff",
           },
         });
+        setUser(res);
+        setRedirect(true);
       } else {
         toast(`Login failed: ${res.data.message}`, {
           icon: "👏",
@@ -62,6 +67,9 @@ const LoginPage = () => {
       }
     }
   };
+  if (redirect) {
+    return <Navigate to="/" />;
+  }
 
   return (
     <section className="flex h-[calc(100vh-220px)] flex-col items-center justify-center">
