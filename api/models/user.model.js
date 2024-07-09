@@ -12,9 +12,10 @@ const UserSchema = new Schema(
       default:
         "https://cdn.pixabay.com/photo/2015/03/04/22/35/avatar-659651_960_720.png",
     },
-    isAdmin: {
-      type: Boolean,
-      default: false,
+    role: {
+      type: String,
+      default: "user",
+      enum: ["user", "host", "admin"],
     },
   },
   { timestamps: true },

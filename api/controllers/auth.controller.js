@@ -13,44 +13,35 @@ export const registerUser = async (req, res, next) => {
       return next(error);
     }
 
-    if (password.length < 8) {
-      const error = errorHandler(
-        400,
-        "Password must be at least 8 characters long",
-      );
-      return next(error);
-    }
+    const conditions = [
+      {
+        regex: /.{8,}/,
+        message: "Password must be at least 8 characters long",
+      },
+      {
+        regex: /\d/,
+        message: "Password must contain at least one digit (0-9)",
+      },
+      {
+        regex: /[a-z]/,
+        message: "Password must contain at least one lowercase letter (a-z)",
+      },
+      {
+        regex: /[A-Z]/,
+        message: "Password must contain at least one uppercase letter (A-Z)",
+      },
+      {
+        regex: /[@#$%^&+=!]/,
+        message:
+          "Password must contain at least one special character (@#$%^&+=!)",
+      },
+    ];
 
-    if (!/\d/.test(password)) {
-      const error = errorHandler(
-        400,
-        "Password must contain at least one digit (0-9)",
-      );
-      return next(error);
-    }
-
-    if (!/[a-z]/.test(password)) {
-      const error = errorHandler(
-        400,
-        "Password must contain at least one lowercase letter (a-z)",
-      );
-      return next(error);
-    }
-
-    if (!/[A-Z]/.test(password)) {
-      const error = errorHandler(
-        400,
-        "Password must contain at least one uppercase letter (A-Z)",
-      );
-      return next(error);
-    }
-
-    if (!/[@#$%^&+=!]/.test(password)) {
-      const error = errorHandler(
-        400,
-        "Password must contain at least one special character (@#$%^&+=!)",
-      );
-      return next(error);
+    for (const condition of conditions) {
+      if (!condition.regex.test(password)) {
+        const error = errorHandler(400, condition.message);
+        return next(error);
+      }
     }
 
     const hashedPassword = bcryptjs.hashSync(password, 10);
