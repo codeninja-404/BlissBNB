@@ -16,10 +16,10 @@ const LoginPage = () => {
     e.preventDefault();
 
     try {
-      const res = await axios.post(`/auth/login`, { ...userInfo });
-      console.log(res.data);
+      const { data } = await axios.post(`/auth/login`, { ...userInfo });
+      console.log(data);
 
-      if (res.data.success) {
+      if (data.success) {
         toast(`Login successful`, {
           icon: "👏",
           style: {
@@ -28,10 +28,10 @@ const LoginPage = () => {
             color: "#fff",
           },
         });
-        setUser(res);
+        setUser(data.user);
         setRedirect(true);
       } else {
-        toast(`Login failed: ${res.data.message}`, {
+        toast(`Login failed: ${data.message}`, {
           icon: "👏",
           style: {
             borderRadius: "100px",
@@ -42,31 +42,33 @@ const LoginPage = () => {
       }
     } catch (error) {
       console.error("Login error:", error);
-      if (
-        error.response &&
-        error.response.data &&
-        error.response.data.message
-      ) {
-        toast(`${error.response.data.message}`, {
-          icon: "👏",
-          style: {
-            borderRadius: "100px",
-            background: "#4e4e4e",
-            color: "#fff",
-          },
-        });
+
+      let errorMessage = "An unexpected error occurred. Please try again.";
+
+      if (error.response) {
+        if (error.response.data && error.response.data.message) {
+          errorMessage = error.response.data.message;
+        } else {
+          errorMessage = `Login failed with status code ${error.response.status}`;
+        }
+      } else if (error.request) {
+        errorMessage =
+          "No response received from server. Please check your network connection.";
       } else {
-        toast(`${error.message}`, {
-          icon: "👏",
-          style: {
-            borderRadius: "100px",
-            background: "#4e4e4e",
-            color: "#fff",
-          },
-        });
+        errorMessage = `Error: ${error.message}`;
       }
+
+      toast(errorMessage, {
+        icon: "👏",
+        style: {
+          borderRadius: "100px",
+          background: "#4e4e4e",
+          color: "#fff",
+        },
+      });
     }
   };
+
   if (redirect) {
     return <Navigate to="/" />;
   }

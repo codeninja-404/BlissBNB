@@ -2,6 +2,7 @@ import User from "../models/user.model.js";
 import { generateToken } from "../utils/tokenGenerator.js";
 import bcryptjs from "bcryptjs";
 import { errorHandler } from "../utils/error.js";
+import verifyToken from "../utils/verifyToken.js";
 
 export const registerUser = async (req, res, next) => {
   try {
@@ -90,5 +91,36 @@ export const loginUser = async (req, res, next) => {
       });
   } catch (err) {
     next(err);
+  }
+};
+
+export const loggedInUser = async (req, res, next) => {
+  const { token } = req.cookies;
+
+  if (!token) {
+    const error = errorHandler(401, "No token found");
+    return next(error);
+  }
+
+  const payload = verifyToken(token);
+
+  if (!payload) {
+    const error = errorHandler(401, "Invalid token");
+    return next(error);
+  }
+
+  try {
+    const user = await User.findById(payload.id);
+
+    if (!user) {
+      const error = errorHandler(404, "User not found");
+      return next(error);
+    }
+
+    res.json(user);
+  } catch (err) {
+    console.error("Error in fetching user:", err);
+    const error = errorHandler(500, "Server error");
+    return next(error);
   }
 };

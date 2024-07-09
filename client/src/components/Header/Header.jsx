@@ -65,11 +65,12 @@ const Header = () => {
               />
             </svg>
           </div>
-          <Link
-            to={"/login"}
-            className="rounded-full bg-gray-500 text-white border-4 border-gray-500 overflow-hidden"
-          >
-            {!user ? (
+
+          {!user ? (
+            <Link
+              to={"/login"}
+              className="rounded-full size-7.5 bg-gray-500 text-white border-4 border-gray-500 overflow-hidden"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
@@ -82,14 +83,19 @@ const Header = () => {
                   clipRule="evenodd"
                 />
               </svg>
-            ) : (
-              <img
-                src={user.data.user.profilePicture}
-                alt=""
-                className="size-[26px] object-cover"
-              />
-            )}
-          </Link>
+            </Link>
+          ) : (
+            <div className=" flex gap-2 justify-center items-center">
+              <div className="w-8 h-8 overflow-hidden bg-gray-300 rounded-full">
+                <img
+                  src={user.profilePicture}
+                  alt=""
+                  className=" object-cover size-9"
+                />
+              </div>
+              <p className="">{user.name}</p>
+            </div>
+          )}
         </div>
       </div>
     </header>
