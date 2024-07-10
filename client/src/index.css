@@ -4,3 +4,6 @@
 .custom-min-height {
   @apply min-h-screen;
 }
+button.primary {
+  @apply bg-secondary p-2 w-full text-white rounded-2xl;
+}

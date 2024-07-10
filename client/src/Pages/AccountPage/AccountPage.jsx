@@ -8,13 +8,13 @@ const AccountPage = () => {
 
   const getLinkClassName = (path) => {
     return location.pathname === path
-      ? "py-2 px-6 bg-primary text-white rounded-full"
+      ? "py-2 px-6 bg-primary text-white rounded-full font-bold"
       : "py-2 px-6";
   };
 
   return (
     <div>
-      <nav className="flex w-full justify-center gap-2">
+      <nav className="flex flex-col md:flex-row w-full justify-center gap-2">
         <Link className={getLinkClassName("/account")} to="/account">
           My Profile
         </Link>
@@ -31,7 +31,9 @@ const AccountPage = () => {
           My Accommodations
         </Link>
       </nav>
-      <Outlet />
+      <div className="mt-10">
+        <Outlet />
+      </div>
     </div>
   );
 };
