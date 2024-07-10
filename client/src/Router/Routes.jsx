@@ -38,6 +38,20 @@ const router = createBrowserRouter([
             <AccountPage />
           </UserRoute>
         ),
+        children: [
+          {
+            path: "",
+            element: <div className="">My Profile</div>,
+          },
+          {
+            path: "bookings",
+            element: <div className="">My Bookings</div>,
+          },
+          {
+            path: "places",
+            element: <div>My Accommodations</div>,
+          },
+        ],
       },
     ],
   },
