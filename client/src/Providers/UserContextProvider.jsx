@@ -5,10 +5,12 @@ export const UserContext = createContext({});
 
 const UserContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (!user) {
       const fetchProfile = async () => {
+        setLoading(true); // Start loading
         try {
           const { data } = await axios.get("/auth/profile");
 
@@ -19,6 +21,8 @@ const UserContextProvider = ({ children }) => {
           }
         } catch (error) {
           console.error("Error fetching profile:", error);
+        } finally {
+          setLoading(false); // Stop loading
         }
       };
 
@@ -27,7 +31,7 @@ const UserContextProvider = ({ children }) => {
   }, [user]);
 
   return (
-    <UserContext.Provider value={{ user, setUser }}>
+    <UserContext.Provider value={{ user, setUser, loading }}>
       {children}
     </UserContext.Provider>
   );

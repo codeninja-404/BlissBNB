@@ -5,7 +5,7 @@ import { UserContext } from "../../Providers/UserContextProvider";
 const Header = () => {
   const { user } = useContext(UserContext);
   return (
-    <header className="fixed w-screen bg-gray-700 text-white">
+    <header className="fixed w-full bg-gray-700 text-white">
       <div className="p-4 flex justify-between items-center max-w-7xl mx-auto">
         <Link
           to="/"
@@ -86,13 +86,16 @@ const Header = () => {
             </Link>
           ) : (
             <div className=" flex gap-2 justify-center items-center">
-              <div className="w-8 h-8 overflow-hidden bg-gray-300 rounded-full">
+              <Link
+                to="/account"
+                className="w-8 h-8 overflow-hidden bg-gray-300 rounded-full"
+              >
                 <img
                   src={user.profilePicture}
                   alt=""
                   className=" object-cover size-9"
                 />
-              </div>
+              </Link>
               <p className="">{user.name}</p>
             </div>
           )}
