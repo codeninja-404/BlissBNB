@@ -9,7 +9,7 @@ const UserContextProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [redirect, setRedirect] = useState(null);
   const logOut = () => {
-    const res = axios.post("/auth/logout");
+    axios.post("/auth/logout");
     setRedirect("/");
     setUser(null);
     toast.success("Logged out successfully..", {

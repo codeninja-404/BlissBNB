@@ -10,6 +10,7 @@ import RootLayout from "../layouts/RootLayout";
 import HomePage from "../Pages/HomePage/HomePage";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import ProfilePage from "../Pages/AccountPage/SubPage/ProfilePage";
+import PlacesPage from "../Pages/AccountPage/SubPage/PlacesPage";
 
 axios.defaults.baseURL = "http://localhost:3000/api";
 axios.defaults.withCredentials = true;
@@ -50,7 +51,11 @@ const router = createBrowserRouter([
           },
           {
             path: "places",
-            element: <div>My Accommodations</div>,
+            element: <PlacesPage />,
+          },
+          {
+            path: "places/:action",
+            element: <PlacesPage />,
           },
         ],
       },

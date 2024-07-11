@@ -7,7 +7,7 @@ const RootLayout = () => {
   return (
     <div className="">
       <Header />
-      <div className="p-4 custom-min-height pt-32 border-2 border-red-500 max-w-7xl mx-auto ">
+      <div className="p-4 custom-min-height pt-32 max-w-7xl mx-auto ">
         <Outlet />
         <Toaster position="top-left" reverseOrder={false} />
       </div>

@@ -4,7 +4,7 @@ import { UserContext } from "../Providers/UserContextProvider";
 
 const UserRoute = ({ children }) => {
   const { user, loading, redirect } = useContext(UserContext);
-  console.log(user, loading, redirect);
+
   if (loading) {
     return <div>Loading...</div>;
   }

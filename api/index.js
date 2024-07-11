@@ -4,6 +4,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import authRoutes from "./routes/auth.route.js";
+import placeRoutes from "./routes/place.route.js";
 import { errorMiddleware } from "./middlewares/error.middleware.js";
 dotenv.config();
 
@@ -31,6 +32,7 @@ app.get("/api/test", (req, res) => {
 });
 
 app.use("/api/auth", authRoutes);
+app.use("/api/place", placeRoutes);
 
 // Error handling middleware
 app.use(errorMiddleware);
