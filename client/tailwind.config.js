@@ -7,6 +7,7 @@ export default {
         primary: "#4682b4",
         secondary: "#151c23",
         nonActive: "#bfbfbf",
+        primary600: "#1e6097",
       },
     },
   },
