@@ -5,7 +5,7 @@ import { SiHomebridge } from "react-icons/si";
 const Header = () => {
   const { user } = useContext(UserContext);
   return (
-    <header className="fixed w-full bg-gray-700 text-white">
+    <header className="z-50 shadow-lg shadow-slate-800/70 fixed w-full bg-gray-700 text-white">
       <div className="p-4 flex justify-between items-center max-w-7xl mx-auto">
         <Link to="/" className="text-white flex  items-center font-bold gap-1">
           <SiHomebridge className="size-8 text-white" />

@@ -1,23 +1,21 @@
 import { Link } from "react-router-dom";
+import {
+  FaFacebook,
+  FaGooglePlus,
+  FaTwitter,
+  FaLinkedin,
+  FaInstagram,
+  FaPinterestP,
+} from "react-icons/fa";
 
 const Footer = () => {
   return (
     <footer className="bg-gray-800 text-white font-sans bg-cover pb-10">
-      <div className="max-w-screen-xl mx-auto px-4">
-        <div className="flex flex-col md:flex-row py-10 border-b border-gray-400">
-          <div className="flex-1.5 md:pr-24">
-            <select className="block border-none mb-4 font-bold p-3 w-full bg-gray-600 rounded-md">
-              <option>English</option>
-              <option>Español</option>
-              <option>French</option>
-            </select>
-            <select className="block border-none mb-4 font-bold p-3 w-full bg-gray-600 rounded-md">
-              <option>INR</option>
-            </select>
-          </div>
-          <div className="flex-1 text-sm md:pr-8 hidden md:block">
+      <div className="max-w-screen-xl mx-auto px-4 text-center ">
+        <div className="flex flex-col md:flex-row py-10 border-b border-gray-400 ">
+          <div className="flex-1 text-sm  flex md:block flex-col items-center pb-5  ">
             <h3 className="text-lg mb-4 font-bold">Company</h3>
-            <ul>
+            <ul className="footerUl">
               <li>
                 <Link
                   to="/about/about-us"
@@ -92,9 +90,9 @@ const Footer = () => {
               </li>
             </ul>
           </div>
-          <div className="flex-1 text-sm md:pr-8 hidden md:block">
+          <div className="flex-1 text-sm  flex md:block flex-col items-center pb-5 ">
             <h3 className="text-lg mb-4 font-bold">Discover</h3>
-            <ul>
+            <ul className="footerUl">
               <li>
                 <Link
                   to="/trust"
@@ -170,9 +168,9 @@ const Footer = () => {
               </li>
             </ul>
           </div>
-          <div className="flex-1 text-sm hidden md:block">
+          <div className="flex-1 text-sm  flex md:block flex-col items-center ">
             <h3 className="text-lg mb-4 font-bold">Hosting</h3>
-            <ul>
+            <ul className="footerUl">
               <li>
                 <Link
                   to="/host"
@@ -221,15 +219,28 @@ const Footer = () => {
             </ul>
           </div>
         </div>
+
         <div className="flex flex-col items-center py-10">
           <h2 className="text-2xl font-bold mb-4">Join Us on</h2>
           <div className="flex space-x-5">
-            <i className="fa fa-facebook p-2 bg-gray-700 border border-white rounded-full hover:opacity-80 cursor-pointer"></i>
-            <i className="fa fa-google-plus p-2 bg-gray-700 border border-white rounded-full hover:opacity-80 cursor-pointer"></i>
-            <i className="fa fa-twitter p-2 bg-gray-700 border border-white rounded-full hover:opacity-80 cursor-pointer"></i>
-            <i className="fa fa-linkedin p-2 bg-gray-700 border border-white rounded-full hover:opacity-80 cursor-pointer"></i>
-            <i className="fa fa-instagram p-2 bg-gray-700 border border-white rounded-full hover:opacity-80 cursor-pointer"></i>
-            <i className="fa fa-pinterest-p p-2 bg-gray-700 border border-white rounded-full hover:opacity-80 cursor-pointer"></i>
+            <span className="icon">
+              <FaFacebook className="size-6" color="1da1f2" />
+            </span>
+            <span className="icon">
+              <FaGooglePlus className="size-6" color="#dd4b39" />
+            </span>
+            <span className="icon">
+              <FaTwitter className="size-6" color="#1da1f2" />
+            </span>
+            <span className="icon">
+              <FaLinkedin className="size-6" color="#0077b5" />
+            </span>
+            <span className="icon">
+              <FaInstagram className="size-6" color="#e4405f" />
+            </span>
+            <span className="icon">
+              <FaPinterestP className="size-6" color="#bd081c" />
+            </span>
           </div>
         </div>
       </div>

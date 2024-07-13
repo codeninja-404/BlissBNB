@@ -138,13 +138,13 @@ const AddNew = () => {
             <label htmlFor="photos" className="label">
               Add photos
             </label>
-            <div className="flex border-2 p-2 rounded-xl h-full border-primary">
+            <div className="flex  border-2 p-2 rounded-xl h-full border-primary  items-end justify-end gap-2">
               {formData.photos.length > 0 && (
-                <div className="flex flex-wrap ">
+                <div className="flex  flex-wrap gap-2 ">
                   {formData.photos.map((photo, index) => (
                     <div
                       key={index}
-                      className="relative w-40 h-24 md:w-20 md:h-12 mr-2 mb-2"
+                      className="relative max-w-20 h-12 border-2 border-gray-500 rounded-lg   z-0"
                     >
                       <img
                         src={URL.createObjectURL(photo)}
@@ -156,7 +156,7 @@ const AddNew = () => {
                         onClick={() => handleRemoveField(index, "photos")}
                         className="absolute top-0 right-0 text-red-500 rounded-full "
                       >
-                        <MdOutlineCancel className="size-7" />
+                        <MdOutlineCancel className="size-5 hover:text-white" />
                       </button>
                     </div>
                   ))}
@@ -164,9 +164,9 @@ const AddNew = () => {
               )}
               <label
                 htmlFor="photos"
-                className="cursor-pointer border-2 flex justify-center items-center rounded-lg w-40 h-24 md:w-20 md:h-12 border-gray-300 hover:border-blue-500 "
+                className="cursor-pointer border-2 flex justify-center items-center rounded-lg min-w-20 md:h-12 border-gray-500 text-gray-500 hover:border-blue-500 hover:text-blue-500"
               >
-                <div className="flex items-center justify-center w-full h-full text-gray-500 hover:text-blue-500 text-4xl">
+                <div className="flex items-center justify-center w-full h-full   text-4xl">
                   +
                 </div>
                 <input
@@ -206,7 +206,7 @@ const AddNew = () => {
               {Object.keys(availablePerks).map((perk) => (
                 <div
                   key={perk}
-                  className="flex w-56  mx-auto  border-2 items-center justify-between space-x-2 mr-4 mb-2 p-2 rounded"
+                  className="flex w-56  mx-auto  border-2 border-gray-500 items-center justify-between space-x-2 mr-4 mb-2 p-2 rounded"
                 >
                   <input
                     type="checkbox"
@@ -214,7 +214,7 @@ const AddNew = () => {
                     name={perk}
                     checked={formData.perks.includes(perk)}
                     onChange={handleChange}
-                    className="checkbox-field"
+                    className="checkbox-field size-6"
                   />
                   <label
                     htmlFor={perk}
@@ -247,7 +247,7 @@ const AddNew = () => {
               Check-In Time
             </label>
             <input
-              type="number"
+              type="date"
               id="checkIn"
               name="checkIn"
               value={formData.checkIn}
@@ -261,7 +261,7 @@ const AddNew = () => {
               Check-Out Time
             </label>
             <input
-              type="number"
+              type="date"
               id="checkOut"
               name="checkOut"
               value={formData.checkOut}
