@@ -5,7 +5,7 @@ import { Toaster } from "react-hot-toast";
 
 const RootLayout = () => {
   return (
-    <div className="">
+    <div className="bg-slate-600 text-white">
       <Header />
       <div className="p-4 custom-min-height pt-32 max-w-7xl mx-auto ">
         <Outlet />
