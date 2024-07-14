@@ -26,7 +26,7 @@
     @apply w-full bg-blue-500 text-white rounded-lg py-2 hover:bg-blue-600;
   }
 
-  .button-gray {
+  .btn-red {
     @apply w-full bg-gray-300 text-white rounded-lg py-2 hover:bg-gray-400;
   }
 
@@ -45,19 +45,11 @@
   }
 
   .checkbox-field {
-    @apply h-4 w-4 text-primary600 border-gray-300 rounded focus:ring-primary600 dark:focus:ring-blue-500 dark:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600;
+    @apply size-6 text-primary600 border-gray-300 rounded focus:ring-primary600 dark:focus:ring-blue-500 dark:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600;
   }
 
   .form-container {
     @apply w-full bg-white rounded-lg shadow dark:border md:mt-0 xl:p-0 dark:bg-gray-800 dark:border-gray-700 p-6 space-y-4 md:space-y-6 sm:p-8;
-  }
-
-  .button {
-    @apply w-full bg-blue-500 text-white rounded-lg py-2 hover:bg-blue-600;
-  }
-
-  .button-gray {
-    @apply w-full bg-red-600 text-white rounded-lg py-2 hover:bg-red-700;
   }
 
   .label {
@@ -67,10 +59,18 @@
     @apply p-1 bg-gray-700 border border-white rounded-full hover:opacity-80 cursor-pointer;
   }
   .footerUl {
-    @apply flex md:block gap-3;
+    @apply flex flex-wrap justify-center md:block gap-3;
   }
 }
 
-button.primary {
+.btn-primary {
+  @apply w-full bg-primary text-white rounded-lg py-2 hover:bg-blue-600;
+}
+
+.btn-red {
+  @apply w-full bg-red-600 text-white rounded-lg py-2 hover:bg-red-700;
+}
+
+.btn-secondery {
   @apply bg-secondary p-2 w-full text-white rounded-2xl;
 }

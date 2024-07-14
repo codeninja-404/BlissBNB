@@ -222,7 +222,7 @@ const Footer = () => {
 
         <div className="flex flex-col items-center py-10">
           <h2 className="text-2xl font-bold mb-4">Join Us on</h2>
-          <div className="flex space-x-5">
+          <div className="flex flex-wrap justify-center gap-4 space-x-5">
             <span className="icon">
               <FaFacebook className="size-6" color="1da1f2" />
             </span>
@@ -244,7 +244,9 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <p className="text-center text-gray-400 text-sm mt-4">BlissBNB</p>
+      <p className="text-center text-gray-400 text-sm mt-4">
+        © {new Date().getFullYear()} BlissBNB
+      </p>
     </footer>
   );
 };

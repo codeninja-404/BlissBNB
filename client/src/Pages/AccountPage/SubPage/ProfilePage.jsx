@@ -1,7 +1,5 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { UserContext } from "../../../Providers/UserContextProvider";
-import toast from "react-hot-toast";
-import axios from "axios";
 
 const ProfilePage = () => {
   const { user, logOut } = useContext(UserContext);
@@ -14,7 +12,7 @@ const ProfilePage = () => {
       <h6>
         Logged in As {user.name} {user.email}
       </h6>
-      <button onClick={handleLogout} className="primary max-w-sm mt-2">
+      <button onClick={handleLogout} className="btn-secondery max-w-sm mt-2">
         Logout
       </button>
     </div>
