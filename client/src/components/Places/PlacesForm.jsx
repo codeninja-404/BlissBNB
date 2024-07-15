@@ -15,10 +15,12 @@ const PlacesForm = () => {
   const [checkIn, setCheckIn] = useState("");
   const [checkOut, setCheckOut] = useState("");
   const [maxGuests, setMaxGuests] = useState(1);
-  console.log(addedPhotos);
 
   const addLinkPhoto = async (e) => {
     e.preventDefault();
+    if (photoLink === "") {
+      return toast.error("Please enter photo url");
+    }
 
     try {
       const { data: filename } = await axios.post("/upload/linked", {
@@ -27,10 +29,30 @@ const PlacesForm = () => {
 
       toast.success("Uploaded successfully:", filename);
       setAddedPhotos([...addedPhotos, filename]);
-      // setPhotoLink("");
+      setPhotoLink("");
     } catch (error) {
       toast.error("Upload Failed");
       console.error("Error linking photo:", error);
+    }
+  };
+  const UploadPhoto = async (e) => {
+    const files = e.target.files;
+
+    const formData = new FormData();
+    formData.append("photo", files[0]);
+
+    try {
+      const { data: fileName } = await axios.post("/upload/local", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      setAddedPhotos([...addedPhotos, fileName]);
+      console.log(fileName);
+      toast.success("Uploaded successfully");
+    } catch (error) {
+      console.error("Error uploading file:", error);
+      toast.error("Failed to upload");
     }
   };
   const inputHeAndDe = (h2, p) => {
@@ -93,18 +115,19 @@ const PlacesForm = () => {
         </div>
         <div className="mt-2 grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
           {addedPhotos.map((link) => (
-            <div key={link} className="p-2  border border-gray-300 rounded-lg">
+            <div key={link} className=" overflow-hidden rounded-xl">
               <img
                 src={"http://localhost:3000/api/uploads/" + link}
                 alt="Place photo"
-                className="w-full h-24 object-cover"
+                className="w-full h-28 object-cover"
               />
             </div>
           ))}
-          <button className="bg-transparent rounded-lg p-8  border-gray-400 border text-2xl text-gray-400 flex gap-2 justify-center items-center">
+          <label className="bg-transparent cursor-pointer rounded-xl p-8  border-gray-400 border text-2xl text-gray-400 flex gap-2 justify-center items-center">
+            <input type="file" className="hidden" onChange={UploadPhoto} />
             <FiUpload className="size-7" />
             <span>Upload</span>
-          </button>
+          </label>
         </div>
         {/* description */}
         {inputHeAndDe(

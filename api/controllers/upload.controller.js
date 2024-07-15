@@ -1,5 +1,6 @@
 import { fileURLToPath } from "url";
 import { dirname, join } from "path";
+
 import download from "image-downloader";
 import { errorHandler } from "../utils/error.js"; // Import your custom error handler
 
@@ -29,5 +30,15 @@ export const uploadLinkedPhotos = async (req, res, next) => {
     res.json(newName);
   } catch (error) {
     next(errorHandler(500, "Failed Upload"));
+  }
+};
+
+export const uploadLocalFile = async (req, res, next) => {
+  try {
+    const { filename } = req.file;
+    const fileUrl = join(filename);
+    res.json(fileUrl);
+  } catch (error) {
+    next(errorHandler(500, "Error uploading file"));
   }
 };
