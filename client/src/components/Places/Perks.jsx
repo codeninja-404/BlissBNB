@@ -6,7 +6,7 @@ import {
   FaDumbbell,
   FaCoffee,
 } from "react-icons/fa";
-const Perks = (selected, onChange) => {
+const Perks = ({ selected, onPerkChange }) => {
   const availablePerks = {
     wifi: {
       label: "WiFi",
@@ -34,6 +34,14 @@ const Perks = (selected, onChange) => {
     },
   };
 
+  const handleCheckboxChange = (e) => {
+    const { checked, name } = e.target;
+    if (checked) {
+      onPerkChange([...selected, name]);
+    } else {
+      onPerkChange([...selected.filter((p) => p !== name)]);
+    }
+  };
   return (
     <div className="flex flex-col">
       <div className="grid md:grid-cols-2  w-full lg:grid-cols-3 gap-3 mx-auto">
@@ -43,6 +51,7 @@ const Perks = (selected, onChange) => {
             className="flex w-full mx-auto  border-2 border-gray-500 items-center justify-between space-x-2 mr-4 mb-2 p-2 rounded"
           >
             <input
+              onChange={handleCheckboxChange}
               type="checkbox"
               id={perk}
               name={perk}

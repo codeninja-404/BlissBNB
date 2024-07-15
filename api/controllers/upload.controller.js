@@ -2,7 +2,7 @@ import { fileURLToPath } from "url";
 import { dirname, join } from "path";
 
 import download from "image-downloader";
-import { errorHandler } from "../utils/error.js"; // Import your custom error handler
+import { errorHandler } from "../utils/error.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -10,10 +10,9 @@ const __dirname = dirname(__filename);
 // Get the directory up to /api
 const apiDir = join(__dirname, "..");
 
-// Upload linked photos to server
 export const uploadLinkedPhotos = async (req, res, next) => {
   try {
-    const { link } = req.body; // Ensure you're extracting `link` correctly
+    const { link } = req.body;
     if (!link || typeof link !== "string") {
       return next(errorHandler(400, "Invalid link provided"));
     }
@@ -26,7 +25,6 @@ export const uploadLinkedPhotos = async (req, res, next) => {
       dest,
     });
 
-    // Send back the relative path of the uploaded image
     res.json(newName);
   } catch (error) {
     next(errorHandler(500, "Failed Upload"));

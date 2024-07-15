@@ -142,7 +142,7 @@ const PlacesForm = () => {
         {/* perks */}
         {inputHeAndDe("Perks", "Select the perks of your place.")}
 
-        <Perks selected={perks} onChange={setPerks} />
+        <Perks selected={perks} onPerkChange={setPerks} />
 
         {/* extrainfo */}
         {inputHeAndDe("Extra info", "House rules, etc.")}
