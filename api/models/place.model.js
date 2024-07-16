@@ -14,9 +14,9 @@ const PlaceSchema = new Schema(
     checkOut: { type: Number, required: true },
     maxGuests: { type: Number, required: true },
     isBooked: { type: Boolean, default: false },
-    priceRange: { type: Number, required: true },
-    rating: { type: Number, min: 0, max: 5 },
-    host: { type: Schema.Types.ObjectId, ref: "User", required: true },
+    // priceRange: { type: Number, required: true },
+    // rating: { type: Number, min: 0, max: 5 },
+    host: { type: Schema.Types.ObjectId, ref: "Host", required: true },
   },
   { timestamps: true },
 );

@@ -5,10 +5,8 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "start": "node api/index.js",
-    "dev": "nodemon api/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "yarn install && yarn install --cwd client && yarn build --cwd client"
+    "start": "node index.js",
+    "dev": "nodemon index.js"
   },
   "keywords": [],
   "author": "",
@@ -27,3 +25,4 @@
     "uuid": "^10.0.0"
   }
 }
+
