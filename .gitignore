@@ -11,7 +11,7 @@ lerna-debug.log*
 node_modules
 
 # Ignore the uploads folder in the api directory
-/api/uploads/
+/api/uploads/*
 
 # Distribution directories
 dist
